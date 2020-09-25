@@ -1,0 +1,46 @@
+.stepBar {
+  color: gray;
+}
+.stepBar li {
+  list-style-type: none;
+  float: left;
+  width: 14.28%;
+  position: relative;
+  text-align: center;
+}
+.stepBar li::before {
+  content: attr(ico);
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid gray;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: white;
+}
+.stepBar li::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: gray;
+  top: 15px;
+  left: -50%;
+  z-index: -1;
+}
+.stepBar li:first-child::after {
+  content: none;
+}
+.stepBar li.active {
+  color: lime;
+}
+.stepBar li.active::before {
+  border-color: lime;
+}
+.stepBar li.active::after {
+  background-color: lime;
+}

@@ -11,7 +11,7 @@ async function startServer() {
   const app = express();
 
   await mongoose.connect(
-    "mongodb+srv://admin:admin@cluster0-u6szf.mongodb.net/autodesp?retryWrites=true&w=majority",
+    "SECRET_KEY",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

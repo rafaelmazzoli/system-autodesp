@@ -13,8 +13,8 @@
 
 import { useState } from "react";
 import validateInput from "../utils/validateInput";
-import { conformToMask } from "react-text-mask";
-import createNumberMask from "text-mask-addons/dist/createNumberMask";
+//import { conformToMask } from "react-text-mask";
+//import createNumberMask from "text-mask-addons/dist/createNumberMask";
 import moment from "moment";
 import _ from "lodash";
 
@@ -239,10 +239,11 @@ function applyMask(value, mask) {
     mask &&
     (typeof mask === "function" || typeof mask === "object")
   )
-    return conformToMask(value.toString(), mask, {
-      guide: false,
-      previousConformedValue: value.toString(),
-    }).conformedValue;
+    return value;
+  // conformToMask(value.toString(), mask, {
+  //   guide: false,
+  //   previousConformedValue: value.toString(),
+  // }).conformedValue;
   return value;
 }
 
@@ -431,11 +432,11 @@ function setUpMask(value, maskName) {
       /\d/,
       /\d/,
     ],
-    money: createNumberMask({
-      prefix: "R$ ",
-      allowDecimal: true,
-      allowNegative: true,
-    }),
+    // money: createNumberMask({
+    //   prefix: "R$ ",
+    //   allowDecimal: true,
+    //   allowNegative: true,
+    // }),
     date: [/[0-3]/, /\d/, "/", /[0-1]/, /\d/, "/", /[1-2]/, /\d/, /\d/, /\d/],
   };
   let selectedMask = maskName;

@@ -13,19 +13,32 @@ export default function Pagination({
 
   const pages = _.range(1, pagesCount + 1);
 
+  const maxPagesLimit = 3;
+
   return (
     <nav>
       <ul className="pagination">
-        {pages.map((page) => (
-          <li
-            key={page}
-            className={page === currentPage ? "page-item active" : "page-item"}
-          >
-            <button onClick={() => onPageChange(page)} className="page-link">
-              {page}
-            </button>
-          </li>
-        ))}
+        {pages.map((page) => {
+          if (
+            page <= currentPage + maxPagesLimit &&
+            page >= currentPage - maxPagesLimit
+          )
+            return (
+              <li
+                key={page}
+                className={
+                  page === currentPage ? "page-item active" : "page-item"
+                }
+              >
+                <button
+                  onClick={() => onPageChange(page)}
+                  className="page-link"
+                >
+                  {page}
+                </button>
+              </li>
+            );
+        })}
       </ul>
     </nav>
   );

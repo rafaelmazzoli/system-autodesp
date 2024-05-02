@@ -10,15 +10,12 @@ import path from "path";
 async function startServer() {
   const app = express();
 
-  await mongoose.connect(
-    "SECRET_KEY",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true,
-    }
-  );
+  await mongoose.connect("SECRET_KEY", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  });
 
   //Iniciar o Fawn para Transações no Mongoose
   Fawn.init(mongoose);
@@ -31,6 +28,17 @@ async function startServer() {
 
   //Cors Enable Hosts to access Requests
   app.use(cors());
+
+  // Force HTTPS
+  app.enable("trust proxy");
+  app.use(function (req, res, next) {
+    if (req.protocol === "http" && process.env.NODE_ENV === "production") {
+      // Request protocol is HTTP. We will force HTTPS, then.
+      return res.redirect("https://" + req.headers.host + req.url);
+    }
+    // Request protocol is HTTPS already. No action needed.
+    next();
+  });
 
   //Body Parser to Json Format
   app.use(express.json());

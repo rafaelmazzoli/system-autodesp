@@ -10,7 +10,7 @@ import path from "path";
 async function startServer() {
   const app = express();
 
-  await mongoose.connect("SECRET_KEY", {
+  await mongoose.connect(process.env.MONGODB_KEY, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
